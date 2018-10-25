@@ -41,6 +41,13 @@ class ServHandler : virtual public ServIf {
         }
         printf("\n");
     }
+
+    int big_num = 1000000000;
+    for (int i = 0; i < big_num; i++) {
+        if (i % (100000) == 0) {
+            printf("%d", i / (big_num/10));
+        }
+    }
   }
 
 };
@@ -77,7 +84,7 @@ int main(int argc, char **argv) {
     std::shared_ptr<TTransportFactory> transportFactory(new TBufferedTransportFactory());
     std::shared_ptr<TServerTransport> serverTransport(new TServerSocket(port));
 
-    std::shared_ptr<ThreadManager> threadManager = ThreadManager::newSimpleThreadManager(10);
+    std::shared_ptr<ThreadManager> threadManager = ThreadManager::newSimpleThreadManager(1);
     std::shared_ptr<PosixThreadFactory> threadFactory = std::shared_ptr<PosixThreadFactory>(new PosixThreadFactory());
     threadManager->threadFactory(threadFactory);
     threadManager->start();
